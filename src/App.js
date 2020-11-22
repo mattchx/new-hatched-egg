@@ -2,26 +2,12 @@ import './App.css';
 import { useState, useEffect } from 'react';
 import UserCards from './UserCards';
 
-import Modal from './Modal';
-
-const BUTTON_WRAPPER_STYLES = {
-  position: 'relative',
-  zIndex: 1,
-};
-
-// const OTHER_CONTENT_STYLES = {
-//   position: 'relative',
-//   zIndex: 2,
-//   backgroundColor: 'red',
-//   padding: '10px',
-// };
 
 function App() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState('');
   const [filteredUsers, setFilteredUsers] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
 
   const useFetch = async () => {
     //https://javascript.info/async-await#error-handling
@@ -50,16 +36,6 @@ function App() {
 
   return (
     <div className='App'>
-      <div style={BUTTON_WRAPPER_STYLES} onClick={() => console.log('clicked')}>
-        <button onClick={() => setIsOpen(true)}>Open Modal</button>
-
-        <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-          Nice Modal
-        </Modal>
-      </div>
-
-      {/* <div style={OTHER_CONTENT_STYLES}>Other Content</div> */}
-
       <div className='header'>
         <h1>Random Users</h1>
 

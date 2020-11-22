@@ -7,7 +7,7 @@
 * 3) Create a text field, and filter the list of data.
 --> DONE!!!!
 * 4) Display more information about the data fetched and create expandable views.
-
+--> DONE!!!! (HALF)
 * 5) Create text inputs for each item in the list, and be able to save information inputted data. Add more filtering capabilities.
 
 :rocket: :metal: :octocat: 

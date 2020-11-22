@@ -46,6 +46,7 @@ export default function Modal({open, children, onClose}) {
     <div style={MODAL_STYLES}>
       {children}
       <button style={BUTTON_STYLES} onClick={onClose}>Close Modal</button>
+      
     </div>
     </>,
     document.getElementById('portal')

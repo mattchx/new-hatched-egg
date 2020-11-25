@@ -7,13 +7,14 @@ const BUTTON_WRAPPER_STYLES = {
   zIndex: 1,
 };
 
-const UserCards = ({ users }) => {
+const UserCards = ({ users, setUsers, filteredUsers, updateUsers}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState('');
+  const [currentId, setCurrentID] = useState('')
 
   const handleClick = (id) => {
-    console.log(id);
-    users.forEach((user) => {
+    setCurrentID(id)
+    filteredUsers.forEach((user) => {
       if (user.login.uuid === id) {
         setSelectedUser(user);
       }
@@ -21,7 +22,7 @@ const UserCards = ({ users }) => {
     console.log(selectedUser);
   };
 
-  return users.map((user, index) => {
+  return filteredUsers.map((user, index) => {
     return (
       <>
         <div className='user' key={index} id={user.login.uuid}>
@@ -65,8 +66,8 @@ const UserCards = ({ users }) => {
             </button>
           </div>
         </div>
-
-        <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+        
+        <Modal updateUsers={updateUsers} users={users} id={currentId} currentUser={selectedUser} open={isOpen} onClose={() => setIsOpen(false)}>
           {selectedUser && (
             <>
               <img

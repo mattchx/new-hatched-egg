@@ -9,7 +9,12 @@
 * 4) Display more information about the data fetched and create expandable views.
 --> DONE!!!! (HALF)
 * 5) Create text inputs for each item in the list, and be able to save information inputted data. Add more filtering capabilities.
-- notes can me made for each user. 
+- TODO: update MODAL to use currentUser.notes to display notes 
+
 
 
 :rocket: :metal: :octocat: 
+
+References
+> Change Parent Component State from Child using hooks in React 
+- https://webomnizz.com/change-parent-component-state-from-child-using-hooks-in-react/

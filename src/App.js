@@ -1,6 +1,8 @@
 import './App.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, createContext } from 'react';
 import UserCards from './UserCards';
+
+
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -8,6 +10,13 @@ function App() {
   const [search, setSearch] = useState('');
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [searchOption, setSearchOption] = useState('name');
+  //const [updatedUsers, setUpdatedUsers] = useState()
+
+// Create a Context
+const UsersContext = createContext();
+// It returns an object with 2 values:
+// { Provider, Consumer }
+// https://daveceddia.com/usecontext-hook/
 
   const useFetch = async () => {
     //https://javascript.info/async-await#error-handling
@@ -18,6 +27,7 @@ function App() {
       console.log(data.results);
       setUsers(data.results);
       setLoading(false);
+      setTimeout(() => console.log(UsersContext), 2500);
     } catch (error) {
       alert(error.message);
     }
@@ -39,6 +49,32 @@ function App() {
       })
     );
   }, [search, users, searchOption]);
+
+  const updateUsers = (note, id) => {
+    console.log(note, id);
+
+    // const userArray =
+    //   users.map((user) => {
+    //     if (user.login.uuid === id) {
+    //       return { ...user, note };
+    //     } else {
+    //       return user;
+    //     }
+    //   })
+
+     const userArray =
+      users.map((user) => {
+        if (user.login.uuid === id) {
+          return { ...user, note:note };
+        } else {
+          return user;
+        }
+      })
+      // console.log(userArray)
+      setUsers(userArray)
+
+     
+  };
 
   return (
     <div className='App'>
@@ -72,7 +108,15 @@ function App() {
 
       <div className='users'>
         {loading && console.log('loading')}
-        {users && <UserCards users={filteredUsers} />}
+        {users && (
+          <UsersContext.Provider users={users} >
+          <UserCards
+            filteredUsers={filteredUsers}
+            setUsers={setUsers}
+            updateUsers={updateUsers}
+          />
+          </UsersContext.Provider>
+        )}
       </div>
     </div>
   );

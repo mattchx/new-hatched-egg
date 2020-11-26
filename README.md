@@ -18,3 +18,7 @@
 References
 > Change Parent Component State from Child using hooks in React 
 - https://webomnizz.com/change-parent-component-state-from-child-using-hooks-in-react/
+> Implementing MCV in reactJS
+https://blog.testdouble.com/posts/2019-11-04-react-mvc/
+> Using useRef in reactJS
+https://www.smashingmagazine.com/2020/11/react-useref-hook/

@@ -1,8 +1,6 @@
 import './App.css';
-import { useState, useEffect, createContext } from 'react';
-import UserCards from './UserCards';
-
-
+import { useState, useEffect } from 'react';
+import UserCards from './components/UserCards';
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -10,24 +8,23 @@ function App() {
   const [search, setSearch] = useState('');
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [searchOption, setSearchOption] = useState('name');
-  //const [updatedUsers, setUpdatedUsers] = useState()
-
-// Create a Context
-const UsersContext = createContext();
-// It returns an object with 2 values:
-// { Provider, Consumer }
-// https://daveceddia.com/usecontext-hook/
 
   const useFetch = async () => {
     //https://javascript.info/async-await#error-handling
     setLoading(true);
     try {
       const response = await fetch('https://randomuser.me/api/?results=10');
-      const data = await response.json();
-      console.log(data.results);
-      setUsers(data.results);
+      const data = await response.json()
+      const usersHaveNotes = data.results.map((user) => {
+       return {...user, note:""}
+      });
+      console.log(usersHaveNotes);
+      setUsers(usersHaveNotes)
+      setFilteredUsers(usersHaveNotes)
       setLoading(false);
-      setTimeout(() => console.log(UsersContext), 2500);
+      setTimeout(function () {
+        console.log(users);
+      }, 3000);
     } catch (error) {
       alert(error.message);
     }
@@ -50,31 +47,20 @@ const UsersContext = createContext();
     );
   }, [search, users, searchOption]);
 
+  
   const updateUsers = (note, id) => {
-    console.log(note, id);
-
-    // const userArray =
-    //   users.map((user) => {
-    //     if (user.login.uuid === id) {
-    //       return { ...user, note };
-    //     } else {
-    //       return user;
-    //     }
-    //   })
-
-     const userArray =
-      users.map((user) => {
-        if (user.login.uuid === id) {
-          return { ...user, note:note };
-        } else {
-          return user;
-        }
-      })
-      // console.log(userArray)
-      setUsers(userArray)
-
-     
+    const updatedUserArray = users.map((user) => {
+      if (user.login.uuid === id) {
+        console.log('matched id')
+        return { ...user, note: note };
+      } else {
+        return user;
+      }
+    });
+    setUsers(updatedUserArray);
+    console.log(`note:${note} has been added to user:${id}`)
   };
+
 
   return (
     <div className='App'>
@@ -94,7 +80,7 @@ const UsersContext = createContext();
           <option value='email'>Email</option>
           <option value='username'>Username</option>
         </select>
-        {/* https://www.youtube.com/watch?v=Q8JyF3wpsHc&t=173s */}
+
         <input
           type='text'
           placeholder='Search'
@@ -106,16 +92,14 @@ const UsersContext = createContext();
         </button>
       </div>
 
-      <div className='users'>
+      <div>
         {loading && console.log('loading')}
         {users && (
-          <UsersContext.Provider users={users} >
           <UserCards
             filteredUsers={filteredUsers}
             setUsers={setUsers}
             updateUsers={updateUsers}
           />
-          </UsersContext.Provider>
         )}
       </div>
     </div>

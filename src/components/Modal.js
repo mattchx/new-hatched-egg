@@ -1,5 +1,8 @@
-import { useState } from 'react';
+import './components.css';
+
+import { useState, useRef } from 'react';
 import ReactDom from 'react-dom';
+import ModalInfo from './ModalInfo';
 
 const MODAL_STYLES = {
   borderRadius: 5,
@@ -47,21 +50,24 @@ const NOTES_BUTTON_STYLES = {
 };
 
 //React Accordion - https://youtu.be/jwp-cYZbgic?t=872
-const Modal = ({
-  open,
-  children,
-  onClose,
-  users,
-  id,
-  currentUser,
-  updateUsers,
-}) => {
+const Modal = ({ open, onClose, users, id, selectedUser, updateUsers }) => {
   const [openNotePad, setOpenNotePad] = useState(false);
   const [note, setNote] = useState('');
+  const alertRef = useRef();
 
   const handleNoteSave = () => {
     setOpenNotePad(false);
     updateUsers(note, id);
+    setNote('');
+    showAlert();
+  };
+
+  const showAlert = () => {
+    alertRef.current.textContent = 'Your changes have been saved!';
+    setTimeout(() => {
+      alertRef.current.textContent = '';
+      onClose();
+    }, 2000);
   };
 
   if (!open) return null;
@@ -69,26 +75,28 @@ const Modal = ({
     <>
       <div style={OVERLAY_STYLES} />
       <div style={MODAL_STYLES}>
-        {children}
+        <ModalInfo selectedUser={selectedUser} />
         <h3>Notes:</h3>
-        {note && (
-          <>
-            <p>{note}</p>
-          </>
-        )}
-        {openNotePad && (
-          <>
-            {}
-            <textarea
-              value={note}
-              onChange={(e) => {
-                setNote(e.target.value);
-                console.log(note);
-              }}
-              placeholder='Enter your notes here...'
-            />
-          </>
-        )}
+        <p>{selectedUser.note ? selectedUser.note : ''}</p>
+        {/* ALERT */}
+        <p className='alert' ref={alertRef}></p>
+        {openNotePad && selectedUser.note ? (
+          <textarea
+            value={note}
+            onChange={(e) => {
+              setNote(e.target.value);
+            }}
+            placeholder='Enter your notes here...'
+          />
+        ) : openNotePad ? (
+          <textarea
+            value={note}
+            onChange={(e) => {
+              setNote(e.target.value);
+            }}
+            placeholder='Enter your notes here...'
+          />
+        ) : null}
         <div>
           <button style={CLOSE_BUTTON_STYLES} onClick={onClose}>
             Close
@@ -102,7 +110,7 @@ const Modal = ({
               style={NOTES_BUTTON_STYLES}
               onClick={() => setOpenNotePad(true)}
             >
-              Edit
+              EDIT
             </button>
           )}
         </div>

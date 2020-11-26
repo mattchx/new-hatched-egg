@@ -49,17 +49,28 @@ const NOTES_BUTTON_STYLES = {
   border: '2px solid brown',
 };
 
+const ALERT_STYLES = {
+  fontWeight: 'bold',
+};
+
 //React Accordion - https://youtu.be/jwp-cYZbgic?t=872
 const Modal = ({ open, onClose, users, id, selectedUser, updateUsers }) => {
   const [openNotePad, setOpenNotePad] = useState(false);
-  const [note, setNote] = useState('');
+  const [note, setNote] = useState(selectedUser.note);
   const alertRef = useRef();
 
   const handleNoteSave = () => {
     setOpenNotePad(false);
-    updateUsers(note, id);
+    if (note !== selectedUser.note) {
+      updateUsers(note, id);
+      showAlert();
+    }
     setNote('');
-    showAlert();
+  };
+
+  const handleAddOrEditNote = () => {
+    setOpenNotePad(true);
+    setNote(selectedUser.note);
   };
 
   const showAlert = () => {
@@ -67,7 +78,7 @@ const Modal = ({ open, onClose, users, id, selectedUser, updateUsers }) => {
     setTimeout(() => {
       alertRef.current.textContent = '';
       onClose();
-    }, 2000);
+    }, 1000);
   };
 
   if (!open) return null;
@@ -79,8 +90,9 @@ const Modal = ({ open, onClose, users, id, selectedUser, updateUsers }) => {
         <h3>Notes:</h3>
         <p>{selectedUser.note ? selectedUser.note : ''}</p>
         {/* ALERT */}
-        <p className='alert' ref={alertRef}></p>
-        {openNotePad && selectedUser.note ? (
+        <p className='alert' ref={alertRef} style={ALERT_STYLES}></p>
+
+        {openNotePad && (
           <textarea
             value={note}
             onChange={(e) => {
@@ -88,17 +100,16 @@ const Modal = ({ open, onClose, users, id, selectedUser, updateUsers }) => {
             }}
             placeholder='Enter your notes here...'
           />
-        ) : openNotePad ? (
-          <textarea
-            value={note}
-            onChange={(e) => {
-              setNote(e.target.value);
-            }}
-            placeholder='Enter your notes here...'
-          />
-        ) : null}
+        )}
+
         <div>
-          <button style={CLOSE_BUTTON_STYLES} onClick={onClose}>
+          <button
+            style={CLOSE_BUTTON_STYLES}
+            onClick={() => {
+              onClose();
+              setOpenNotePad(false);
+            }}
+          >
             Close
           </button>
           {openNotePad ? (
@@ -106,11 +117,8 @@ const Modal = ({ open, onClose, users, id, selectedUser, updateUsers }) => {
               SAVE
             </button>
           ) : (
-            <button
-              style={NOTES_BUTTON_STYLES}
-              onClick={() => setOpenNotePad(true)}
-            >
-              EDIT
+            <button style={NOTES_BUTTON_STYLES} onClick={handleAddOrEditNote}>
+              {selectedUser.note ? 'EDIT' : 'Add Note'}
             </button>
           )}
         </div>

@@ -1,6 +1,7 @@
 import './App.css';
 import { useState, useEffect } from 'react';
 import UserCards from './components/UserCards';
+import SearchBar from './components/SearchBar';
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -14,13 +15,13 @@ function App() {
     setLoading(true);
     try {
       const response = await fetch('https://randomuser.me/api/?results=10');
-      const data = await response.json()
+      const data = await response.json();
       const usersHaveNotes = data.results.map((user) => {
-       return {...user, note:""}
+        return { ...user, note: '' };
       });
       console.log(usersHaveNotes);
-      setUsers(usersHaveNotes)
-      setFilteredUsers(usersHaveNotes)
+      setUsers(usersHaveNotes);
+      setFilteredUsers(usersHaveNotes);
       setLoading(false);
       setTimeout(function () {
         console.log(users);
@@ -47,44 +48,31 @@ function App() {
     );
   }, [search, users, searchOption]);
 
-  
   const updateUsers = (note, id) => {
     const updatedUserArray = users.map((user) => {
       if (user.login.uuid === id) {
-        console.log('matched id')
+        console.log('matched id');
         return { ...user, note: note };
       } else {
         return user;
       }
     });
     setUsers(updatedUserArray);
-    console.log(`note:${note} has been added to user:${id}`)
+    console.log(`note:${note} has been added to user:${id}`);
   };
-
 
   return (
     <div className='App'>
       <div className='header'>
         <h1>Random Users</h1>
 
-        <select
-          value={searchOption}
-          onChange={(e) => {
-            setSearchOption(e.currentTarget.value);
+        <SearchBar
+          searchOption={searchOption}
+          setOption={(e) => {
+            setSearchOption(e.target.value);
             console.log(searchOption);
           }}
-        >
-          <option selected value='name'>
-            Name
-          </option>
-          <option value='email'>Email</option>
-          <option value='username'>Username</option>
-        </select>
-
-        <input
-          type='text'
-          placeholder='Search'
-          onChange={(e) => setSearch(e.target.value)}
+          setSearch={(e) => setSearch(e.target.value)}
         />
 
         <button className='fetch-button' onClick={useFetch}>

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import UserCards from './components/UserCards';
 import SearchBar from './components/SearchBar';
 
+
 function App() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);

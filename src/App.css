@@ -6,7 +6,7 @@
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
   /* padding-top: 80px; */
-  max-width: 1200px;
+  max-width: 100%;
   margin: auto;
 }
 
@@ -36,7 +36,7 @@
 }
 
 .fetch-button:hover { 
-  background-color: firebrick;
+  background-color: #e5989b;
   color: white;
 }
 

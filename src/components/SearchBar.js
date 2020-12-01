@@ -4,7 +4,7 @@ import './SearchBar.css';
 
 const SearchBar = ({ searchOption, setOption, setSearch }) => {
   return (
-    <div>
+    <div className='search-bar'>
       <select className='select-css' value={searchOption} onChange={setOption}>
         <option selected value='name'>Name</option>
         <option value='email'>Email</option>

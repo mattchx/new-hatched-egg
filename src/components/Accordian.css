@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:400,600&display=swap');
 
+.data {
+  margin: .5rem 1rem;
+}
 /* Style the accordian section */
 .accordian__section {
   display: flex;
@@ -11,7 +14,7 @@
   background-color: #eee;
   color: #444;
   cursor: pointer;
-  padding: 18px;
+  padding: .3rem;
   display: flex;
   align-items: center;
   border: none;
@@ -29,7 +32,8 @@
 .accordian__title {
   font-family: 'Open Sans', sans-serif;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 1.1rem;
+  margin-left: 1rem;
 }
 
 /* style the accordian chevon icon */
@@ -58,4 +62,5 @@
   font-weight: 400;
   font-size: 14px;
   padding: 18px;
+  margin-right: 5em;
 }

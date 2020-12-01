@@ -1,18 +1,23 @@
+/* COLOR PALETTE */
+/* https://coolors.co/ffcdb2-ffb4a2-e5989b-b5838d-6d6875 */
+
 .users {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
 }
 
 .user {
-  background: #fff;
   position: relative;
   border-radius: 5px;
   padding: 20px;
   margin: 10px;
-  width: 47%;
-  color: #333;
+  width: 30rem;
+  color: black;
   flex-basis: width;
-  background-color: rgb(238, 221, 221);
+  
+  background: linear-gradient(to right, rgb(238, 221, 221) -6%, #fad4c0 100%);
 }
 
 .user h3 {

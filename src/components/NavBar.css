@@ -1,0 +1,18 @@
+* {
+  box-sizing: border-box;
+}
+/* NAV BAR Styling */
+.nav-bar {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(to right, #e5989b -6%, #FFCDB2 100%);
+  color: #fff1e6;
+  z-index: 1;
+  padding: 0;
+  box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.2);
+
+}
+
+.nav-bar h1 {
+  margin-left: 5rem;
+}

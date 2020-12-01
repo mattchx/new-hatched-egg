@@ -3,7 +3,6 @@ import './Modal.css';
 import { useState, useRef } from 'react';
 import ReactDom from 'react-dom';
 import ModalInfo from './ModalInfo';
-import Accordian from './Accordian';
 
 const Modal = ({ open, onClose, users, id, selectedUser, updateUsers }) => {
   const [openNotePad, setOpenNotePad] = useState(false);
@@ -39,15 +38,7 @@ const Modal = ({ open, onClose, users, id, selectedUser, updateUsers }) => {
       <div className='modal-styles'>
 
         {/* CURRENTLY WORKING ON */}
-        <Accordian title='Lorem Ipsum' content='Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...' />
-        <Accordian title='Lorem Ipsum' content='Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit... Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...' />
-        <Accordian title='Lorem Ipsum' content='
-        <p>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...</p>
-        </br>
-        <p>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...</p>
-        </br>
-        <p>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...</p>
-        ' />
+        
         <ModalInfo selectedUser={selectedUser} />
         <h3>Notes:</h3>
         <p>{selectedUser.note ? selectedUser.note : ''}</p>

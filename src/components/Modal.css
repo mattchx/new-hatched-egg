@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:400,600&display=swap');
+
 .modal-styles {
   border-radius: 5px;
   padding: 2rem 3rem;
@@ -17,7 +19,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.7);
   z-index: 1000;
 }
 
@@ -45,4 +47,11 @@
 
 .alert {
   font-weight: bold;
+}
+
+textarea {
+  font-family: "Open sans", sans-serif;
+  resize: none;
+  outline: none;
+  width: 100%;
 }

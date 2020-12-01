@@ -2,6 +2,7 @@ import './App.css';
 import { useState, useEffect } from 'react';
 import UserCards from './components/UserCards';
 import SearchBar from './components/SearchBar';
+import NavBar from './components/NavBar'
 
 
 function App() {
@@ -65,7 +66,7 @@ function App() {
   return (
     <div className='App'>
       <div className='header'>
-        <h1>Random Users</h1>
+        <NavBar />
 
         <SearchBar
           searchOption={searchOption}
@@ -81,7 +82,6 @@ function App() {
         </button>
       </div>
 
-      <div>
         {loading && console.log('loading')}
         {users && (
           <UserCards
@@ -90,7 +90,7 @@ function App() {
             updateUsers={updateUsers}
           />
         )}
-      </div>
+      
     </div>
   );
 }

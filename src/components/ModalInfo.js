@@ -1,7 +1,7 @@
 import './components.css';
 
+import Accordian from './Accordian';
 const ModalInfo = ({ selectedUser }) => {
-
   return (
     <>
       <img
@@ -15,19 +15,35 @@ const ModalInfo = ({ selectedUser }) => {
       </h2>
 
       <div className='details'>
-        <h3>Contact</h3>
-        <p>Email: {selectedUser.email}</p>
-        <p>Phone: {selectedUser.phone}</p>
-        <h3>Time</h3>
-        <p>Birth Year: {'' + new Date(selectedUser.dob.date).getFullYear()}</p>
-        <p>Age: {selectedUser.dob.age}</p>
-        <h3>Location</h3>
-        <p>City: {selectedUser.location.city}</p>
-        <p>State: {selectedUser.location.state}</p>
-        <p>Country: {selectedUser.location.country}</p>
-        <h3>Login</h3>
-        <p>Username: {selectedUser.login.username}</p>
-        <p>Password: {selectedUser.login.password}</p>
+        <Accordian
+          title='Contact'
+          content={`
+            <p class='data'><strong>Email:</strong> ${selectedUser.email}</p>
+            <p class='data'><strong>Phone:</strong> ${selectedUser.phone}</p>`}
+        />
+        <Accordian
+          title='Time'
+          content={`
+          <p class='data'><strong>Birth Year:</strong> ${'' + new Date(selectedUser.dob.date).getFullYear()}</p>
+          <p class='data'><strong>Age:</strong> ${selectedUser.dob.age}</p>
+            `}
+        />
+        <Accordian
+          title='Location'
+          content={`
+          <p class='data'><strong>City:</strong>  ${selectedUser.location.city}</p>
+          <p class='data'><strong>State:</strong> ${selectedUser.location.state}</p>
+          <p class='data'><strong>Country:</strong> ${selectedUser.location.country}</p>
+            `}
+        />
+        <Accordian
+          title='Login'
+          content={`
+          <p class='data'><strong>Username:</strong> ${selectedUser.login.username}</p>
+          <p class='data'><strong>Password:</strong> ${selectedUser.login.password}</p>
+            `}
+        />
+        
       </div>
     </>
   );
